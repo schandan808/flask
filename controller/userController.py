@@ -30,6 +30,12 @@ def getData():
 def createUser(data) :
     try:
         print(data)
+        getData = usersModel.find_one({"email": "test@gmail.com"})
+        print(getData,'=====')
+
+
+
+
         return data   
     except Exception as e :
         error_msg =str(e)

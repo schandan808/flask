@@ -1,22 +1,19 @@
-from flask import Blueprint 
+from flask import Blueprint ,jsonify
 from helper import helper 
 from controller import userController
 
 main_route = Blueprint("main_router",__name__)
 
-
 @main_route.route('/')
 def index():
     try: 
-        print()
+        data = userController.getData()
+        return helper.success(data,"success data")
+    except Exception as e:
+        error_message = str(e)
+        return helper.failed(error_message,"faild")
 
-    except:
-        print()    
-    # data = userController.getData()
-    # return helper.success(data,"success data")
-
-
-@main_route.route('/test',)
+@main_route.route('/test')
 def userData(data):
     try :
         print()

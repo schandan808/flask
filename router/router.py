@@ -1,10 +1,10 @@
-from flask import Blueprint ,jsonify
+from flask import Blueprint ,jsonify,request
 from helper import helper 
 from controller import userController
 
 main_route = Blueprint("main_router",__name__)
 
-@main_route.route('/')
+@main_route.route('/',methods=['GET'])
 def index():
     try: 
         data = userController.getData()
@@ -13,10 +13,13 @@ def index():
         error_message = str(e)
         return helper.failed(error_message,"faild")
 
-@main_route.route('/test')
-def userData(data):
+@main_route.route('/test',methods=['POST'])
+def userData():
     try :
-        print()
-    except:
-        print("An exception occurred")
+        data = request.json
+        userc = userController.createUser(data)    
+        return helper.success(userc,"success")
+    except Exception as e:
+        error_message = str(e)
+        return helper.failed(error_message,"faild")
 

@@ -29,14 +29,14 @@ def getData():
 
 def createUser(data) :
     try:
-        print(data)
+        # print(data)
         getData = usersModel.find_one({"email": "test@gmail.com"})
-        print(getData,'=====')
-
-
-
-
+        getData["_id"]=str(getData["_id"])
+        dd= helper.randomNuber()
+        data=getData
+        data["random"]=dd
         return data   
     except Exception as e :
         error_msg =str(e)
+        print(error_msg)
         return helper.failed(error_msg ,"faild")   
